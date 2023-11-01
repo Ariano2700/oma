@@ -27,6 +27,22 @@ public class EspecieControlador {
         Especie nueva_especie = servicioImplementacion.guardar(especie);
         return new ResponseEntity<>(nueva_especie, HttpStatus.CREATED);
     }
+    @PutMapping("/actualizar/especie/{id}")
+    public ResponseEntity<Especie> actualizarEspecie(@PathVariable long id, @RequestBody Especie especie){
+        Especie actualizarEspecie = servicioImplementacion.obtenerPorId(id);
+        actualizarEspecie.setCategoria(especie.getCategoria());
+        actualizarEspecie.setNombreComun(especie.getNombreComun());
+        actualizarEspecie.setNombreCientifico(especie.getNombreCientifico());
+        actualizarEspecie.setTotal(especie.getTotal());
+        actualizarEspecie.setDescripcion(especie.getDescripcion());
+        actualizarEspecie.setIdCategoriaAmenaza(especie.getIdCategoriaAmenaza());
+        actualizarEspecie.setIdAlimento(especie.getIdAlimento());
+        actualizarEspecie.setIdFamilia(especie.getIdFamilia());
+
+        Especie especie_actualizada = servicioImplementacion.guardar(actualizarEspecie);
+        return new ResponseEntity<>(especie_actualizada, HttpStatus.CREATED);
+    }
+
     @GetMapping("/categoria/{categoria}")
     public ResponseEntity<Especie> obtenerPorCategoria(@PathVariable String categoria){
         Especie especie = servicioImplementacion.obtenerPorCategoria(categoria);

@@ -1,4 +1,4 @@
-package com.oma2.oma20.modelos;
+package com.oma2.oma20.modelos.Animal;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +23,7 @@ public class Animal implements Serializable {
     private int idAnimal;
     private String nombreAnimal;
     private int edad;
-    private String sexo;
+    private Sexo sexo;
     private String tipo;
     private String estado;
     private int idEspecie;
