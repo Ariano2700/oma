@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/apo/animal")
+@RequestMapping("/api/animal")
 @Validated
 public class AnimalControlador {
     @Autowired
