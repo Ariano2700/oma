@@ -27,10 +27,20 @@ public class TrabajadorRolControlador {
         TrabajadorRol nuevo_rol = servicioImplementacion.guardar(rol);
         return new ResponseEntity<>(nuevo_rol, HttpStatus.CREATED);
     }
-    @GetMapping("/rol/{nombre}")
-    public ResponseEntity<TrabajadorRol> obtenerRol (@PathVariable String nombre){
-        TrabajadorRol rol = servicioImplementacion.obtenerPorNombre(nombre);
-        return ResponseEntity.ok(rol);
+    @GetMapping("/rol/{param}")
+    public ResponseEntity<TrabajadorRol> obtenerPorEmailODni(@PathVariable String param){
+        TrabajadorRol obtener;
+        if(param.matches("\\d+")){
+            int id = Integer.parseInt(param);
+            obtener = servicioImplementacion.obtenerPorId(id);
+        }else{
+            obtener = servicioImplementacion.obtenerPorNombre(param);
+        }
+
+        if(obtener == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(obtener);
     }
 
     @PutMapping("/actualizar/{id}")
