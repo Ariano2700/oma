@@ -9,5 +9,4 @@ public interface TrabajadorRolServicio {    public List<TrabajadorRol> obtenerTo
     public TrabajadorRol obtenerPorId(long id);
     public TrabajadorRol obtenerPorNombre(String nombre);
     public void eliminar(long id);
-
 }

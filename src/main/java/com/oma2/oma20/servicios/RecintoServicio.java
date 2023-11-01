@@ -11,6 +11,5 @@ public interface RecintoServicio {
     public Recinto obtenerPorId(long id);
     public List<Recinto> obtenerPorTipo(String tipo);
     public Recinto obtenerPorNombre(String nombre);
-
     public void eliminar(long id);
 }

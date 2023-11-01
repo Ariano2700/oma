@@ -12,6 +12,5 @@ public interface AnimalServicio {
     public List<Animal> obtenerPorSexo(Sexo sexo);
     public List<Animal> obtenerPorTipo(String tipo);
     public Animal obtenerPorNombre (String nombreAnimal);
-
     public void eliminar(long id);
 }
