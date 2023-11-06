@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/oma")
+@RequestMapping("/api/alimento")
 public class AlimentoControlador {
 
     @Autowired
