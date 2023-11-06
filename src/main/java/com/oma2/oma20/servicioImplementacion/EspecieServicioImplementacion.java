@@ -29,8 +29,38 @@ public class EspecieServicioImplementacion implements EspecieServicio {
     }
 
     @Override
-    public Especie obtenerPorCategoria(String categoria) {
-        return repositorio.findByCategoria(categoria);
+    public List<Especie> obtenerPorClase(String clase) {
+        return repositorio.findByClase(clase);
+    }
+
+    @Override
+    public List<Especie> obtenerPorEspecie(String especie) {
+        return repositorio.findByEspecie(especie);
+    }
+
+    @Override
+    public List<Especie> obtenerPorFamilia(String familia) {
+        return repositorio.findByFamilia(familia);
+    }
+
+    @Override
+    public List<Especie> obtenerPorNombreCientifico(String nombreCientifico) {
+        return repositorio.findByNombreCientifico(nombreCientifico);
+    }
+
+    @Override
+    public List<Especie> obtenerPorGenero(String genero) {
+        return repositorio.findByGenero(genero);
+    }
+
+    @Override
+    public List<Especie> obtenerIdCategoriaAmenaza(int idCategoriaAmenaza) {
+        return repositorio.findByIdCategoriaAmenaza(idCategoriaAmenaza);
+    }
+
+    @Override
+    public List<Especie> obtenerPorIdAlimento(int idAlimento) {
+        return repositorio.findByIdAlimento(idAlimento);
     }
 
     @Override

@@ -21,12 +21,13 @@ public class Especie implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idEspecie;
-    private String categoria;
+    private String clase;
     private String nombreComun;
     private String nombreCientifico;
-    private int total;
-    private String descripcion;
+    private String especie;
+    private String orden;
+    private String familia;
+    private String genero;
     private int idCategoriaAmenaza;
     private int idAlimento;
-    private int idFamilia;
 }
