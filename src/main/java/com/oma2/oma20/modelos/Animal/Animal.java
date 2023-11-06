@@ -1,9 +1,6 @@
 package com.oma2.oma20.modelos.Animal;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +20,7 @@ public class Animal implements Serializable {
     private int idAnimal;
     private String nombreAnimal;
     private int edad;
+    @Enumerated(EnumType.STRING)
     private Sexo sexo;
     private String tipo;
     private String estado;

@@ -21,13 +21,13 @@ public class CategoriaAmenazaControlador {
     @GetMapping("/all")
     public List<CategoriaAmenaza> obtenerTodo() {return servicioImplementacion.obtenerTodo(); }
 
-    @PostMapping("/guardar/categoriaamenza")
+    @PostMapping("/guardar/categoriaamenaza")
     public ResponseEntity<CategoriaAmenaza> guardar(@RequestBody CategoriaAmenaza categoriaAmenaza){
         CategoriaAmenaza nueva_categoriaAmenaza = servicioImplementacion.guardar(categoriaAmenaza);
         return new ResponseEntity<>(nueva_categoriaAmenaza, HttpStatus.CREATED);
     }
 
-    @PutMapping("/actualizar/categoriaamenza/{id}")
+    @PutMapping("/actualizar/categoriaamenaza/{id}")
     public ResponseEntity<CategoriaAmenaza> actualizarCategoriaAmenaza(@PathVariable long id, @RequestBody CategoriaAmenaza categoriaAmenaza){
         CategoriaAmenaza actualizarCategoriaAmenaza = servicioImplementacion.obtenerPorId(id);
         actualizarCategoriaAmenaza.setMinagri(categoriaAmenaza.getMinagri());
@@ -37,8 +37,12 @@ public class CategoriaAmenazaControlador {
         CategoriaAmenaza categoriaAmenaza_actualizada = servicioImplementacion.guardar(actualizarCategoriaAmenaza);
         return new ResponseEntity<>(categoriaAmenaza_actualizada, HttpStatus.CREATED);
     }
-
-    @DeleteMapping("/eliminar/{id}")
+    @GetMapping("/porId/{id}")
+    public ResponseEntity<CategoriaAmenaza> obtenerId(@PathVariable long id){
+        CategoriaAmenaza amenaza = servicioImplementacion.obtenerPorId(id);
+        return ResponseEntity.ok(amenaza);
+    }
+    @DeleteMapping("/eliminar/categoriaamenaza/{id}")
     public ResponseEntity<HashMap<String, Boolean>> eliminarCategoriaA(@PathVariable long id){
         this.servicioImplementacion.eliminar(id);
         HashMap<String,Boolean> estadoCategoriaAmenaza = new HashMap<>();

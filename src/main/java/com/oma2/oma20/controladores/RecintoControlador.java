@@ -53,7 +53,7 @@ public class RecintoControlador {
         Recinto recinto = servicioImplementacion.obtenerPorId(id);
         return ResponseEntity.ok(recinto);
     }
-    @DeleteMapping("/eliminar/animal/{id}")
+    @DeleteMapping("/eliminar/recinto/{id}")
     public ResponseEntity<HashMap<String, Boolean>> eliminarEspecie (@PathVariable long id) {
         this.servicioImplementacion.eliminar(id);
         HashMap<String, Boolean> estadoEspecie = new HashMap<>();
