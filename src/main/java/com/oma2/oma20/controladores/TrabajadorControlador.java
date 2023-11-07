@@ -43,7 +43,7 @@ public class TrabajadorControlador {
         if(obtener == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.ok(obtener);
+        return ResponseEntity.ok(obtener    );
     }
     @GetMapping("/roles/{rol}")
     public ResponseEntity<List<Trabajador>> obtenerPorRoles(@PathVariable int idRol){
@@ -63,7 +63,7 @@ public class TrabajadorControlador {
         actualizarTrabajador.setEmail(trabajador.getEmail());
         actualizarTrabajador.setPassword(trabajador.getPassword());
         actualizarTrabajador.setUsername(trabajador.getUsername());
-        actualizarTrabajador.setIdRol(trabajador.getIdRol());
+        //actualizarTrabajador.setIdRol(trabajador.getIdRol());
 
         Trabajador trabajador_actualizado = servicioImplementacion.guardar(actualizarTrabajador);
         return new ResponseEntity<>(trabajador_actualizado, HttpStatus.CREATED);
