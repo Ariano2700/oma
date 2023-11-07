@@ -43,7 +43,7 @@ public class TrabajadorRolControlador {
         return ResponseEntity.ok(obtener);
     }
 
-    @PutMapping("/actualizar/{id}")
+    @PutMapping("/actualizar/rol/{id}")
     public ResponseEntity<TrabajadorRol> actualizarDatosRol(@PathVariable long id, @RequestBody TrabajadorRol trabajadorRol){
         TrabajadorRol actualizarRol = servicioImplementacion.obtenerPorId(id);
         actualizarRol.setNombre(trabajadorRol.getNombre());
