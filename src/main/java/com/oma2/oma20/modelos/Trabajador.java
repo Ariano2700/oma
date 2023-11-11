@@ -23,10 +23,13 @@ public class Trabajador implements Serializable {
     private int dni;
     private int telefono;
     private String direccion;
+    private String biografia;
     private String email;
     private String password;
     private String username;
     @Lob
     private byte[] fotoPerfil;
+    @Lob
+    private  byte[] fotoPortada;
     private int idRol;
 }
