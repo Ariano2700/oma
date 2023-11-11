@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,6 +69,20 @@ public class TrabajadorControlador {
 
         Trabajador trabajador_actualizado = servicioImplementacion.guardar(actualizarTrabajador);
         return new ResponseEntity<>(trabajador_actualizado, HttpStatus.CREATED);
+    }
+    @PatchMapping("/actualizar/foto/perfil/{dni}")
+    //public ResponseEntity<Trabajador> actualizarFotoPerfil (@PathVariable int dni, @RequestBody Trabajador trabajador){
+    public ResponseEntity<Trabajador> actualizarFotoPerfil (@PathVariable int dni, @RequestParam("fotoPerfil")MultipartFile fotoPerfil){
+        try {
+            Trabajador trabajadorExistente = servicioImplementacion.obtenerPorDni(dni);
+            if (!fotoPerfil.isEmpty()){
+                trabajadorExistente.setFotoPerfil(fotoPerfil.getBytes());
+            }
+            Trabajador trabajador_actualizado = servicioImplementacion.guardar(trabajadorExistente);
+            return new ResponseEntity<>(trabajador_actualizado, HttpStatus.CREATED);
+        }catch (IOException e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/verificar/email")

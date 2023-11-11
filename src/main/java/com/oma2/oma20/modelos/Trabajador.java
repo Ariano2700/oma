@@ -1,9 +1,6 @@
 package com.oma2.oma20.modelos;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,5 +26,7 @@ public class Trabajador implements Serializable {
     private String email;
     private String password;
     private String username;
+    @Lob
+    private byte[] fotoPerfil;
     private int idRol;
 }
