@@ -83,11 +83,18 @@ public class TrabajadorControlador {
         actualizarTrabajador.setDireccion(trabajador.getDireccion());
         actualizarTrabajador.setBiografia(trabajador.getBiografia());
         actualizarTrabajador.setEmail(trabajador.getEmail());
-        actualizarTrabajador.setPassword(trabajador.getPassword());
         actualizarTrabajador.setUsername(trabajador.getUsername());
 
         Trabajador trabajador_actualizado = servicioImplementacion.guardar(actualizarTrabajador);
         return new ResponseEntity<>(trabajador_actualizado, HttpStatus.CREATED);
+    }
+    //CAMBIAR CONTRASEÑA
+    @PatchMapping("/cambiar/contraseña/{dni}")
+    public ResponseEntity<Trabajador> cambiarContraseña(@PathVariable int dni, @RequestBody Trabajador trabajador){
+        Trabajador cambiartContraseña = servicioImplementacion.obtenerPorDni(dni);
+        cambiartContraseña.setPassword(trabajador.getPassword());
+        Trabajador contraseña_actualizada = servicioImplementacion.guardar(cambiartContraseña);
+        return new ResponseEntity<>(contraseña_actualizada, HttpStatus.CREATED);
     }
     //FOTO DE PERFIL
     @PatchMapping("/actualizar/foto/perfil/{dni}")
