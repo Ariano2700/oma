@@ -2,6 +2,7 @@ package com.oma2.oma20.controladores;
 
 import com.oma2.oma20.modelos.Trabajador;
 import com.oma2.oma20.servicioImplementacion.TrabajadorServicioImplementacion;
+import com.oma2.oma20.utils.ValidacionesPost;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/api/trabajador")
@@ -21,6 +24,9 @@ public class TrabajadorControlador {
 
     @Autowired
     TrabajadorServicioImplementacion servicioImplementacion;
+    @Autowired
+    ValidacionesPost validacionesPost;
+
 
     @GetMapping("/all")
     public List<Trabajador> obtenerTrabajadores(){return servicioImplementacion.obtenerTodo();}
@@ -28,6 +34,10 @@ public class TrabajadorControlador {
 
     @PostMapping("/guardar/trabajador")
     public ResponseEntity<Trabajador> guardarAlimento(@RequestBody Trabajador trabajador ){
+         if (!validacionesPost.isValidPassword(trabajador.getPassword()) || !validacionesPost.isValidEmail(trabajador.getEmail()) || !validacionesPost.isValidDNI(trabajador.getDni())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
         Trabajador nuevo_trabajador = servicioImplementacion.guardar(trabajador);
         return new ResponseEntity<>(nuevo_trabajador, HttpStatus.CREATED);
     }
