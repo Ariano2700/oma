@@ -45,8 +45,25 @@ public class TrabajadorServicioImplementacion implements ITrabajadorServicio {
     }
 
     @Override
+    public boolean existeDNI(int dni) {
+        Trabajador trabajador = repositorio.findByDni(dni);
+        return trabajador != null;
+    }
+
+    @Override
+    public boolean existeUsername(String username) {
+        Trabajador trabajador = repositorio.findByUsername(username);
+        return trabajador != null;
+    }
+
+    @Override
     public Trabajador obtenerPorEmail(String correo) {
         return repositorio.findByEmail(correo);
+    }
+
+    @Override
+    public Trabajador obtenerPorUsername(String username) {
+        return repositorio.findByUsername(username);
     }
 
     @Override

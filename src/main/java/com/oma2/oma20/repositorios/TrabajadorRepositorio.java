@@ -11,5 +11,6 @@ public interface TrabajadorRepositorio extends JpaRepository<Trabajador, Long> {
     Trabajador findByDni(int dni);
     List<Trabajador> findByIdRol (int idRol);
     Trabajador findByEmail (String email);
+    Trabajador findByUsername (String username);
 
 }

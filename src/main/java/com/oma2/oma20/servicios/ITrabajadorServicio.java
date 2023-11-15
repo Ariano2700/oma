@@ -9,8 +9,11 @@ public interface ITrabajadorServicio {
     public Trabajador guardar(Trabajador trabajador);
     public Trabajador obtenerPorId(long id);
     public Trabajador obtenerPorDni(int dni);
+    public Trabajador obtenerPorEmail (String correo);
+    public Trabajador obtenerPorUsername (String username);
     public List<Trabajador> obtenerPorIdRol (int idRol);
     public boolean existeCorreo (String correo);
-    public Trabajador obtenerPorEmail (String correo);
+    public boolean existeDNI (int dni);
+    public boolean existeUsername (String username);
     public void eliminar(long id);
 }

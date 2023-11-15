@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 @Component
 public class ValidacionesPost {
+    //VALIDACIONES PARA EL REGUSTRO DE LOS TRABAJADORES
     public boolean isValidPassword(String password) {
         // Validar la contraseña: al menos 8 caracteres, al menos un número y un carácter especial
         String regex = "^(?=.*[0-9])(?=.*[!@#$%^&*])(?=\\S+$).{8,}$";
@@ -28,4 +29,8 @@ public class ValidacionesPost {
         Matcher matcher = pattern.matcher(dniString);
         return matcher.matches();
     }
+    //VALIDACIONES PARA EL REGUSTRO DE LOS TRABAJADORES
+
+
+
 }

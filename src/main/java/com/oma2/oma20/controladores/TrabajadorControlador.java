@@ -45,17 +45,19 @@ public class TrabajadorControlador {
     @GetMapping("/obtener/{param}")
     public ResponseEntity<Trabajador> obtenerPorEmailODni(@PathVariable String param){
         Trabajador obtener;
-        if(param.matches("\\d+")){
+        if(param.matches("\\d{8}")){
             int dni = Integer.parseInt(param);
             obtener = servicioImplementacion.obtenerPorDni(dni);
-        }else{
+        } else if (param.contains("@") && param.contains(".com")) {
             obtener = servicioImplementacion.obtenerPorEmail(param);
+        } else{
+            obtener = servicioImplementacion.obtenerPorUsername(param);
         }
 
         if(obtener == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.ok(obtener    );
+        return ResponseEntity.ok(obtener);
     }
     @GetMapping("/roles/{rol}")
     public ResponseEntity<List<Trabajador>> obtenerPorRoles(@PathVariable int idRol){
@@ -135,12 +137,21 @@ public class TrabajadorControlador {
         }
     }
 
-    @GetMapping("/verificar/email")
-    public ResponseEntity<Map<String, Boolean>> verificarExistencia (@RequestParam String email){
-        boolean existeCorreo = servicioImplementacion.existeCorreo(email);
+    @GetMapping("/verificar/existencia/cdu")
+    public ResponseEntity<Map<String, Boolean>> verificarExistencia (@RequestParam String param){
+        boolean existeParam;
+        if(param.contains("@") && param.contains(".com")){
+            existeParam = servicioImplementacion.existeCorreo(param);
+        } else if(param.matches("\\d{8}")){
+            int dni = Integer.parseInt(param);
+            existeParam = servicioImplementacion.existeDNI(dni);
+        }else{
+            existeParam = servicioImplementacion.existeUsername(param);
+        }
+
         Map<String, Boolean> response = new HashMap<>();
-        response.put("Existe", existeCorreo);
-        return ResponseEntity.ok(response);
+        response.put("Existe", existeParam);
+        return  ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/eliminar/trabajador/{id}")
