@@ -23,11 +23,45 @@ public class ImagenesAnimalControlador {
     @GetMapping("/all")
     public List<ImagenesAnimal> obtenerImagenes(){return servicioImplementacion.obtenerTodo();}
 
+    /*@PostMapping("/guardar/imagen")
+    public ResponseEntity<ImagenesAnimal> guardarImg(@RequestParam("imgAnimal") MultipartFile imgAnimal, @RequestParam("idAnimal") int idAnimal){
+        try {
+            // Verifica si la imagen no es nula y tiene contenido
+            if (imgAnimal != null && !imgAnimal.isEmpty()) {
+                // Aquí puedes realizar la lógica para guardar la imagen en tu servicio
+                byte[] imgBytes = imgAnimal.getBytes();
+                ImagenesAnimal nueva_imagen = servicioImplementacion.guardar(new ImagenesAnimal(idAnimal,imgBytes));
+                // Devuelve la nueva imagen creada
+                return new ResponseEntity<>(nueva_imagen, HttpStatus.CREATED);
+            } else {
+                // Manejar el caso en el que no se haya proporcionado una imagen
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        } catch (IOException e) {
+            // Manejar errores de IO, como problemas al leer los bytes de la imagen
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }*/
     @PostMapping("/guardar/imagen")
-    public ResponseEntity<ImagenesAnimal> guardarImg(@RequestBody ImagenesAnimal imagenesAnimal){
-        ImagenesAnimal nueva_imagen = servicioImplementacion.guardar(imagenesAnimal);
-        return new ResponseEntity<>(nueva_imagen, HttpStatus.CREATED);
+    public ResponseEntity<ImagenesAnimal> guardarImg(@RequestParam("imgAnimal") MultipartFile imgAnimal, @RequestParam("idAnimal") int idAnimal) {
+        try {
+            // Verifica si la imagen no es nula y tiene contenido
+            if (imgAnimal != null && !imgAnimal.isEmpty()) {
+                // Aquí puedes realizar la lógica para guardar la imagen en tu servicio
+                byte[] imgBytes = imgAnimal.getBytes();
+                ImagenesAnimal nueva_imagen = servicioImplementacion.guardar(new ImagenesAnimal(0,idAnimal, imgBytes));
+                // Devuelve la nueva imagen creada
+                return new ResponseEntity<>(nueva_imagen, HttpStatus.CREATED);
+            } else {
+                // Manejar el caso en el que no se haya proporcionado una imagen
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        } catch (IOException e) {
+            // Manejar errores de IO, como problemas al leer los bytes de la imagen
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
     @GetMapping("/porId/animal/{idAnimal}")
     public ResponseEntity<List<ImagenesAnimal>> obtenerPorIdAnimal (@PathVariable int idAnimal){
         List<ImagenesAnimal> porIdAnimal = servicioImplementacion.obtenerPorIdAnimal(idAnimal);
