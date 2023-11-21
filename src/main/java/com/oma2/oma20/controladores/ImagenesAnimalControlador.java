@@ -22,26 +22,6 @@ public class ImagenesAnimalControlador {
 
     @GetMapping("/all")
     public List<ImagenesAnimal> obtenerImagenes(){return servicioImplementacion.obtenerTodo();}
-
-    /*@PostMapping("/guardar/imagen")
-    public ResponseEntity<ImagenesAnimal> guardarImg(@RequestParam("imgAnimal") MultipartFile imgAnimal, @RequestParam("idAnimal") int idAnimal){
-        try {
-            // Verifica si la imagen no es nula y tiene contenido
-            if (imgAnimal != null && !imgAnimal.isEmpty()) {
-                // Aquí puedes realizar la lógica para guardar la imagen en tu servicio
-                byte[] imgBytes = imgAnimal.getBytes();
-                ImagenesAnimal nueva_imagen = servicioImplementacion.guardar(new ImagenesAnimal(idAnimal,imgBytes));
-                // Devuelve la nueva imagen creada
-                return new ResponseEntity<>(nueva_imagen, HttpStatus.CREATED);
-            } else {
-                // Manejar el caso en el que no se haya proporcionado una imagen
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-        } catch (IOException e) {
-            // Manejar errores de IO, como problemas al leer los bytes de la imagen
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }*/
     @PostMapping("/guardar/imagen")
     public ResponseEntity<ImagenesAnimal> guardarImg(@RequestParam("imgAnimal") MultipartFile imgAnimal, @RequestParam("idAnimal") int idAnimal) {
         try {
@@ -67,6 +47,11 @@ public class ImagenesAnimalControlador {
         List<ImagenesAnimal> porIdAnimal = servicioImplementacion.obtenerPorIdAnimal(idAnimal);
         return ResponseEntity.ok(porIdAnimal);
     }
+    @GetMapping("/porId/{id}")
+    public ResponseEntity<ImagenesAnimal> obtenerPorId (@PathVariable long id){
+        ImagenesAnimal porId = servicioImplementacion.obtenerPorId(id);
+        return ResponseEntity.ok(porId);
+    }
 
     @PatchMapping("/actualizar/imagenes/{id}")
     public ResponseEntity<ImagenesAnimal> actualizarImg(@PathVariable long id, @RequestParam("fotoAnimal")MultipartFile imagenAnimal){
@@ -82,7 +67,6 @@ public class ImagenesAnimalControlador {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
     @DeleteMapping("/eliminar/img/{id}")
     public ResponseEntity<HashMap<String, Boolean>> eliminarImg(@PathVariable long id){
         this.servicioImplementacion.eliminar(id);
